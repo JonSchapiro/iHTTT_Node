@@ -12,9 +12,10 @@ app.post('/api/call/:callerName', function (req, res) {
   console.log(req.body)
   console.log(req.body.callDelay)
   console.log(req.body.callRepeat)
+  console.log(req.body.myNumber)
   var url = 'http://demo.twilio.com/docs/voice.xml';
   client.makeCall({
-        to: '+15612519337',
+        to: req.body.myNumber,
         from: Config.number,
         url: url
     }, function(err, message) {
@@ -33,10 +34,10 @@ app.post('/api/call/:callerName', function (req, res) {
 });
 
 app.post('/outbound', function(req, res) {
-        
-        res.satus(200)
-        res.send('Outbound call received');
-    });
+    
+    res.satus(200)
+    res.send('Outbound call received');
+});
 
 app.listen(3000, function () {
   console.log('Cruisin on port 3000');
